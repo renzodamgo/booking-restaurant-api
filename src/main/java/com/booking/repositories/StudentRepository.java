@@ -30,4 +30,7 @@ public interface StudentRepository extends JpaRepository<Student,Long> {
             @Param("firstName") String firstName,
             @Param("age") Integer age
     );
+
+    @Query("DELETE FROM Student s WHERE s.id=?1")
+    int deleteStudentById(Long id);
 }

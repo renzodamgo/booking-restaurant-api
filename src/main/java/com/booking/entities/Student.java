@@ -13,6 +13,7 @@ import javax.persistence.*;
         uniqueConstraints = {
                 @UniqueConstraint(name = "student_email_unique",
                 columnNames = "email")
+
         }
 )
 @AllArgsConstructor

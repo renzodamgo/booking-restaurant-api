@@ -1,9 +1,6 @@
 package com.booking.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -11,24 +8,49 @@ import javax.persistence.*;
 
 @Entity
 //El nombre que va a tener en la base de datos
-@Table(name= "restaurants")
+@Table(
+        name = "restaurants",
+        uniqueConstraints = {
+                @UniqueConstraint(name = "restaurants_name_unique",
+                        columnNames = "name")
 
-@Getter
-@Setter
+        }
+)
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
 public class Restaurant {
     // Debe tener una clave primaria
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(
+            name = "restaurant_sequence",
+            sequenceName = "restaurant_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "student_sequence"
+    )
     private long id;
-    @Column(name = "name")
+    @Column(name = "name",
+            nullable = false
+    )
+
     private String name;
-    @Column(name = "description")
+    @Column(name = "description",
+            nullable = false,
+            columnDefinition = "TEXT"
+    )
     private String description;
-    @Column(name = "image")
+    @Column(name = "image",
+            nullable = false,
+            columnDefinition = "TEXT"
+    )
     private String image;
-    @Column(name = "address")
+    @Column(name = "address",
+            nullable = false,
+            columnDefinition = "TEXT"
+    )
     private String address;
 
 
